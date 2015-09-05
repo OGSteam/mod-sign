@@ -29,7 +29,15 @@ if (isset($pub_delcache))
 
 }
 
-
+if(isset($pub_htaccess))
+{
+	
+	$monht = fopen('mod/sign/.htaccess', 'r+');
+	ftruncate($monht,0);
+	fputs($monht, utf8_decode ($pub_htaccess)) ;
+	
+	fclose($monht);
+}
 
 
 ?>
@@ -108,8 +116,21 @@ if (isset($pub_delcache))
 		<?php endif;?>
 		
 		
+		<tr>
+			<td class="c_tech" colspan="2"> .htaccess		</td>
+		</tr>
+<tr>
+	<th  colspan="2">
+			Valeur ErrorDocument : <br /> <br />
+			<?php	echo str_replace("/vue", "",  dirname (__FILE__) )."/sign.php";  ?> 
+
+	<br /> <br />
+	
+	 <textarea rows="10" cols="200"  name="htaccess" ><?php echo file_get_contents('mod/sign/.htaccess'); ?></textarea> 
+	</th>
+</tr>
 		
-		
+
 		
 		
 		<tr>
