@@ -31,11 +31,11 @@ if (isset($pub_delcache))
 
 if(isset($pub_htaccess))
 {
-	
+
 	$monht = fopen('mod/sign/.htaccess', 'r+');
 	ftruncate($monht,0);
 	fputs($monht, utf8_decode ($pub_htaccess)) ;
-	
+
 	fclose($monht);
 }
 
@@ -71,7 +71,8 @@ if(isset($pub_htaccess))
 			} else {
 				echo '<span style="font-weight: 800;color: red;">La librairie GD n\'est pas activée ! le mod ne pourra pas fonctionner !</span>';
 			}
-			?></th>
+			?>
+			</th>
 		</tr>
 
 
@@ -98,39 +99,74 @@ if(isset($pub_htaccess))
 
 			<th>Temps de cache (heure)</th>
 			<th><input name="signCache"
-				value="<?php echo mod_get_option("signCache"); ?>" type="textbox"></th>
+				value="<?php echo mod_get_option("signCache"); ?>" type="textbox">
+			</th>
 
 		</tr>
 
 		<tr>
 
 			<th>Effacer cache</th>
-			<th><input name="delcache" value="1" type="checkbox"></th>
+			<th><input name="delcache" value="1" type="checkbox">
+			</th>
 		</tr>
 
-		
+
 		<?php if(isset($pub_delcache)) :?>
 		<tr>
-			<th  colspan="2"><span style="font-weight: 800;color: red;">Cache supprimé.</span>			</th>
+			<th colspan="2"><span style="font-weight: 800; color: red;">Cache
+					supprimé.</span>
+			
+			</th>
 		</tr>
 		<?php endif;?>
-		
-		
+
+
 		<tr>
-			<td class="c_tech" colspan="2"> .htaccess		</td>
+			<td class="c_tech" colspan="2">.htaccess</td>
 		</tr>
-<tr>
-	<th  colspan="2">
-			Valeur ErrorDocument : <br /> <br />
-			<?php	echo str_replace("/vue", "",  dirname (__FILE__) )."/sign.php";  ?> 
+		<tr>
+			<td colspan="2">indiquer la bonne valeur errorDocument<br /> c'est le
+				chemin complet depuis la racine !<br /> ce n'est PAS à partir de
+				"http"...<br /> ne pas oublier le "/" au début du chemin<br /> un
+				exemple, si votre serveur est à l'adresse
+				http://hébergeur.fr/login/OGSpy/<br /> la ligne sera de la forme :
+				ErrorDocument 404 /OGSpy/mod/sign/sign.php<br /> <br />
 
-	<br /> <br />
-	
-	 <textarea rows="10" cols="200"  name="htaccess" ><?php echo file_get_contents('mod/sign/.htaccess'); ?></textarea> 
-	</th>
-</tr>
+
+			</td>
+		</tr>
+		<tr>
+
+			<th colspan="2">Valeurs possibles ErrorDocument : <br /> <?php $shtaccess = str_replace("/vue", "",  dirname (__FILE__) )."/sign.php";?>
+				<?php $ahtaccess  = explode("/", $shtaccess)?> <?php $ahtaccess = array_reverse($ahtaccess)?>
+				<?php $temps = "";?> <?php foreach ($ahtaccess as $value):?> <?php if ($temps == "" ){
+					$temps = $value;
+				}else {$temps = $value."/".$temps;
+				}?> <?php echo "/".$temps ;?> <br /> <?php endforeach ;?> <br /> <br />
+				ELLE DOIT ABSOLUMENT ETRE INSCRITE CI-DESSOUS !!!<br />
+			<br />
+
+
+			</th>
+		</tr>
+		</tr>
+		<tr>
+			<th colspan="2"><textarea rows="10" cols="200" name="htaccess">
+					<?php echo file_get_contents('mod/sign/.htaccess'); ?>
+				</textarea></th>
 		
+	
+	<tr>
 
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		<tr>
