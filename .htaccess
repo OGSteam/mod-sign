@@ -1,0 +1,22 @@
+order deny,allow
+deny from all
+<Files *.png>
+Allow from all
+</Files>
+<Files sign.php>
+Allow from all
+</Files>
+<Files samples.php>
+Allow from all
+</Files>
+<Files testgd.php>
+Allow from all
+</Files>
+
+
+
+
+ErrorDocument 404 /html/ogspy/mod/sign/sign.php
+
+
+
