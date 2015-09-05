@@ -26,7 +26,7 @@ if ($is_ok == true) {
 	) DEFAULT CHARSET=utf8;");
 	
 	
-	mod_set_option("signCache", 10);// en heure
+	mod_set_option("signCache", "10");// en heure
 
 	
 

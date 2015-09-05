@@ -14,7 +14,7 @@ require_once 'include/common.php';
 // TODO mettre ca en base ulterieurement
 //global $pub_action;
 $pub_action = "sign" ;
-$refresh =  mod_get_option("signCache") * 60 *60 ; 
+$refresh =  ((int)mod_get_option("signCache")) * 60 *60 ; 
 
 
 
