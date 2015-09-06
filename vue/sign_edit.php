@@ -41,8 +41,9 @@ if($update)
 }
 
 
-//var_dump($sign_actif);
-//var_dump($code);
+// on supprime l 'image du cache
+unlink("mod/sign/fond/cache/".$sign_id.".png);
+
 
 
 // arrivé ici, les prerequis sont bons ...
