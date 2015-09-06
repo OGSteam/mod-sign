@@ -20,8 +20,6 @@ $individual_ranking = galaxy_show_ranking_unique_player("machine" ,TRUE);
 	</tr>
 	<?php $i++; ?>
 	<?php endforeach; ?>
-
-
 </table>
 
 

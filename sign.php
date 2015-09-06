@@ -67,8 +67,22 @@ if (file_exists($pathimg) && filemtime($pathimg) >  (time() -$refresh) )//l mage
 $individual_ranking = galaxy_show_ranking_unique_player($sign['name'] ,TRUE);
 
 $test = new signcode_parser( $sign['code']);
+
+
+
+
 $test->set_value(individual_ranking_to_sign_code_ranking($individual_ranking , "player"));
 
+//var_dump(individual_ranking_to_sign_code_ranking($individual_ranking , "player"));
+//echo "\$tabempty = array(<br />";
+//foreach(individual_ranking_to_sign_code_ranking($individual_ranking , "player") as $key => $value)
+//{
+//	echo "\"$key\" => \"?\" , <br />";
+//}
+
+
+
+//echo ")<br />";
 $test->run();
 
 

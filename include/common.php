@@ -44,7 +44,8 @@ function get_samples()
 	$samples[] = array("[rectanglefilled]<br />[rectangle]", "Faire un effet" ,"[fond=230,220][/fond]\r\n[color=120,120,120]color2[/color]\r\n[color=200,200,200]color1[/color]\r\n[rectanglefilled=50,50,100,100,color2]\r\n[rectangle=50,50,100,100,color1]\r\n[rectanglefilled=150,150,200,200,color2]\r\n[rectanglefilled=152,152,201,201,color1]\r\n" );
 	$samples[] = array("[string]", "Ecrit du texte <br />Il faut preciser la taille ( entre 1 et 5 ), le point d origine <br />Cette balise utilise une balise color." ,"[fond=350,90][/fond]\r\n[color=120,200,120]color2[/color]\r\n[string=3,100,50,color2]test[/string]\r\n[string=5,100,70,color2]CONCLUANT[/string]\r\n" );
 	$samples[] = array("[stringeffect]", "Ecrit du texte <br />Il faut preciser la taille ( entre 1 et 5 ) ainsi que le type d effet  (1  ou 2 ), le point d origine <br />Cette balise utilise une balise color." ,"[fond=350,90][/fond]\r\n[color=120,200,120]color2[/color]\r\n[color=150,150,150]color1[/color]\r\n[stringeffect=3,100,50,color2,color1,1]test[/stringeffect]\r\n[stringeffect=5,100,70,color2,color1,2]CONCLUANT[/stringeffect]\r\n" );
-
+	//$samples[] = array("[degrade]", "Dessine un degradé de couleur <br />Il faut preciser les cotes du rectangle à dessiner ainsi que le sens du degradé 'h' ou 'v' et la couleur de debut et de fin <br />Cette balise utilise deux balises color." ,"[fond=350,90][/fond]\r\n[color=255,0,0]color2[/color]\r\n[color=0,0,255]color1[/color]\r\n[degrade=20,20,300,85,v,color1,color2]\r\n\r\n" );
+	
 
 	$var = "";
 	for ($i = 0 ; $i <  count($types) ; $i++)
@@ -93,16 +94,60 @@ function get_samples()
 
 function individual_ranking_to_sign_code_ranking($array, $type)
 {
+	$retour = array(); 
 	if ($type == "player")
 	{
 		$type = "P";
+		
+		
+		// on initialise un tableau vide
+		$retour = array(
+				"P_date_a" => "?" ,
+				"P_date_b" => "?" ,
+				"P_rank_general_a" => "?" ,
+				"P_rank_general_b" => "?" ,
+				"P_rank_general_c" => "?" ,
+				"P_points_general_a" => "?" ,
+				"P_points_general_b" => "?" ,
+				"P_points_general_c" => "?" ,
+				"P_rank_eco_a" => "?" ,
+				"P_rank_eco_b" => "?" ,
+				"P_rank_eco_c" => "?" ,
+				"P_points_eco_a" => "?" ,
+				"P_points_eco_b" => "?" ,
+				"P_points_eco_c" => "?" ,
+				"P_rank_techno_a" => "?" ,
+				"P_rank_techno_b" => "?" ,
+				"P_rank_techno_c" => "?" ,
+				"P_points_techno_a" => "?" ,
+				"P_points_techno_b" => "?" ,
+				"P_points_techno_c" => "?" ,
+				"P_rank_military_a" => "?" ,
+				"P_rank_military_b" => "?" ,
+				"P_rank_military_c" => "?" ,
+				"P_points_military_a" => "?" ,
+				"P_points_military_b" => "?" ,
+				"P_points_military_c" => "?" ,
+				"P_rank_military_l_a" => "?" ,
+				"P_rank_military_l_b" => "?" ,
+				"P_rank_military_l_c" => "?" ,
+				"P_points_military_l_a" => "?" ,
+				"P_points_military_l_b" => "?" ,
+				"P_points_military_l_c" => "?" ,
+				"P_rank_military_d_a" => "?" ,
+				"P_rank_military_d_b" => "?" ,
+				"P_rank_military_d_c" => "?" ,
+				"P_points_military_d_a" => "?" ,
+				"P_points_military_d_b" => "?" ,
+				"P_points_military_d_c" => "?" ,
+		);
 	}
 	elseif ($type == "alliance")
 	{
 		$type = "A";
 	}
 
-	$retour = array();
+
 	$date_key =  key($array);
 
 	///on va travailler en cle => valeur
@@ -130,4 +175,7 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 
 	return $retour;
 }
+
+
+
 
