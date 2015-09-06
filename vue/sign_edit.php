@@ -40,9 +40,15 @@ if($update)
 	$db->sql_query('UPDATE '.TABLE_SIGN_USERS.' SET code = "'.$code.'", sign_actif =  '.$sign_actif.' WHERE sign_id = '.$sign_id);
 }
 
-
 // on supprime l 'image du cache
-unlink("mod/sign/fond/cache/".$sign_id.".png);
+$patthFile = "mod/sign/fond/cache/".$sign_id.".png";
+if(file_exists($patthFile))
+{
+	// on utilise la mise en cache en passant création a timestamp de 0
+	touch($patthFile,0);
+
+}
+
 
 
 
