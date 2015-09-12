@@ -13,7 +13,7 @@ if ($user_data['user_admin'] != 1 && $user_data['user_coadmin'] != 1) {
 // recuperation de la variable si besoin est
 if (isset($pub_signCache))
 {
-	mod_set_option("signCache", $pub_signCache);// en heure
+	mod_set_option("signCache", abs((int)$pub_signCache));// en heure
 
 }
 
@@ -99,7 +99,7 @@ if(isset($pub_htaccess))
 
 			<th>Temps de cache (heure)</th>
 			<th><input name="signCache"
-				value="<?php echo mod_get_option("signCache"); ?>" type="textbox">
+				value="<?php echo abs((int)mod_get_option("signCache")); ?>" type="textbox">
 			</th>
 
 		</tr>

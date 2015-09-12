@@ -52,9 +52,9 @@ function get_samples()
 	{
 		foreach ($types as $type)
 		{
-			$tmp_i = 30 + $i *45;
-			$tmp_i2 = 30 + 10 + $i *45;
-			$tmp_i3 = 30 + 20 + $i *45;
+			$tmp_i = 90 + $i *45;
+			$tmp_i2 = 90 + 10 + $i *45;
+			$tmp_i3 = 90 + 20 + $i *45;
 			$var = $var." [string=2,10,".$tmp_i.",color2]".$types[$i]." : [/string]";
 			$var = $var." [string=2,10,".$tmp_i2.",color2] RANK  : [var=P_rank_".$types[$i]."_a] | [var=P_rank_".$types[$i]."_b] | [var=P_rank_".$types[$i]."_c] [/string]";
 			$var = $var." [string=2,10,".$tmp_i3.",color2] POINT : [var=P_points_".$types[$i]."_a] | [var=P_points_".$types[$i]."_b] |  [var=P_points_".$types[$i]."_c] [/string]";
@@ -74,10 +74,13 @@ function get_samples()
 		}
 
 	}
-	$samples[] = array("[player]", "Retourne les infomations du joueurs <br />Il faut preciser le type d'information recherché aisi que le type de formatage   (0,1  ou 2)." ,
+	$samples[] = array("[var]", "Retourne les infomations du joueurs <br />Il faut preciser le type d'information recherché aisi que le type de formatage   (0,1  ou 2)." ,
 			"[fond=350,800][/fond]\r\n[color=120,200,120]color2[/color]\r\n
 			[string=2,10,1,color2]Date en cours : [var=P_date_a] ou [var=P_date_b][/string]
-			[string=4,10,15,color2]classement joueur : [/string]".$var );
+			[string=2,10,30,color2]Nom joueur : [var=player_name] ! [/string]
+			[string=2,10,50,color2]Alliance joueur : [var=alliance_name][/string]
+			
+			[string=4,10,80,color2]classement joueur : [/string]".$var );
 //	$retour[$type."_date_a"] = date("d/m/Y", $date_key);
 	//$retour[$type."_date_b"]
 
@@ -102,6 +105,8 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 		
 		// on initialise un tableau vide
 		$retour = array(
+				"player_name" => "XXX" ,
+				"alliance_name" => "XXX" ,
 				"P_date_a" => "?" ,
 				"P_date_b" => "?" ,
 				"P_rank_general_a" => "?" ,
@@ -149,27 +154,47 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 
 
 	$date_key =  key($array);
+	$date_key =  array_keys($array);
+	
+	//var_dump( $date_key);
+	//exit();
 
 	///on va travailler en cle => valeur
-	$retour[$type."_date_a"] = date("d/m/Y", $date_key);
-	$retour[$type."_date_b"] = date("d F Y", $date_key);
+	$retour[$type."_date_a"] = date("d/m/Y", $date_key[0]);
+	$retour[$type."_date_b"] = date("d F Y", $date_key[0]);
 
 	$aselect = array("rank","points");
 
-	foreach ($array[$date_key]  as $key => $value)
+	
+	foreach ($date_key  as $date)
 	{
-		foreach ( $aselect as $select)
+			$can_return = true; // tant que tout ne sera pas rempli on passera la valeur a false 		
+		foreach ($array[$date]  as $key => $value)
 		{
-			$retour[$type."_".$select."_".$key."_a"] = $value[$select];
-			$retour[$type."_".$select."_".$key."_b"] =  number_format($value[$select], 0, ',', ' ') ;
-			$retour[$type."_".$select."_".$key."_c"] = number_format($value[$select], 0, ',', '.') ;
-				
+			// on prepare une eventuelle sortie ( => pas la peine de boucler jusqu au bout si toutest renseigné
+		
+			foreach ( $aselect as $select)
+			{
+				if ( isset($retour[$type."_".$select."_".$key."_a"]) && $retour[$type."_".$select."_".$key."_a"]  == "?" ) // si pas encore chargé ( isset pour partie help ... )
+				{
+					$retour[$type."_".$select."_".$key."_a"] = $value[$select];
+					$retour[$type."_".$select."_".$key."_b"] =  number_format($value[$select], 0, ',', ' ') ;
+					$retour[$type."_".$select."_".$key."_c"] = number_format($value[$select], 0, ',', '.') ;
+					$can_return = false;
+				}
+			}
+		
+
 		}
 
-
-
-
+			if ($can_return )
+			{
+				return $retour; 
+			}
+		
 	}
+		
+	
 
 
 

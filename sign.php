@@ -11,10 +11,8 @@ $_SERVER['SCRIPT_FILENAME'] = str_replace(basename(__FILE__), 'index.php', preg_
 include("common.php");
 require_once 'include/common.php';
 
-// TODO mettre ca en base ulterieurement
-//global $pub_action;
 $pub_action = "sign" ;
-$refresh =  ((int)mod_get_option("signCache")) * 60 *60 ; 
+$refresh =  abs((int)mod_get_option("signCache")) * 60 *60 ; 
 
 
 
@@ -64,14 +62,17 @@ if (file_exists($pathimg) && filemtime($pathimg) >  (time() -$refresh) )//l mage
 }
 
 /// sinon généré ilmage via parser bbcode
-$individual_ranking = galaxy_show_ranking_unique_player($sign['name'] ,TRUE);
+$individual_ranking = galaxy_show_ranking_unique_player($sign['name'] );
+
+//var_dump(galaxy_show_ranking_unique_player($sign['name'],TRUE ));
 
 $test = new signcode_parser( $sign['code']);
+$value = individual_ranking_to_sign_code_ranking($individual_ranking , "player");
+$value["player_name"] = $sign['name'];
+$value["alliance_name"] = "A Implementer";
 
+$test->set_value($value);
 
-
-
-$test->set_value(individual_ranking_to_sign_code_ranking($individual_ranking , "player"));
 
 //var_dump(individual_ranking_to_sign_code_ranking($individual_ranking , "player"));
 //echo "\$tabempty = array(<br />";

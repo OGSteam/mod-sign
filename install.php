@@ -21,7 +21,7 @@ if ($is_ok == true) {
 			`sign_id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
 			`player_id` INT( 255 ) NOT NULL  ,
 			`sign_actif` INT( 11 ) NOT NULL ,
-			 `code` TEXT NOT NULL ,
+			`code` TEXT NOT NULL ,
 			PRIMARY KEY ( `sign_id` )
 	) DEFAULT CHARSET=utf8;");
 	

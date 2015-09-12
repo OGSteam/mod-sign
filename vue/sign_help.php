@@ -1,7 +1,8 @@
 <?php 
 global $user_data ;
 $samples = get_samples();
-$individual_ranking = galaxy_show_ranking_unique_player("machine" ,TRUE);
+$individual_ranking = galaxy_show_ranking_unique_player($user_data['user_stat_name'] );
+
 ?>
 <table width="1200">
 	<tr>
