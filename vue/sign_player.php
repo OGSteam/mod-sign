@@ -6,7 +6,7 @@ $result = $db->sql_query($requete);
 <input name="action" type="hidden" value="sign_player">
 <table width="800">
  <tr>
-	<td class="c" colspan="3">signatures</td>
+	<td class="c" colspan="5">signatures</td>
 </tr>
 
 <?php
