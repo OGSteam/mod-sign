@@ -12,7 +12,7 @@ else
 {
 	$title = "Signatures présentes dans le cache";
 	$cache = glob("mod/sign/fond/cache/*.png");
-	$temp = explode("/index.php?action=sign&subaction=galerie", $_SERVER['HTTP_REFERER']);
+	$temp = explode("/index.php?action=", $_SERVER['HTTP_REFERER']);
 	$path  = $temp[0]."/mod/sign/";
 }
 
