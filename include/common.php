@@ -215,6 +215,46 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 	return $retour;
 }
 
+function add_compteur($name )
+{
+	//cf http://www.supportduweb.com/scripts_tutoriaux-code-source-65-php-compteur-de-visites-scripts-php.html
+	$name = "mod/sign/compteur/".$name.".txt";
+	if(file_exists($name))
+	{
+		$compteur = fopen($name, 'r+');
+		$compte = fgets($compteur);
+	}
+	else
+	{
+		$compteur = fopen($name, 'a+');
+		$compte = 0;
+	}
+	$compte++; 
+		fseek($compteur, 0);
+		fputs($compteur, $compte);
+		fclose($compteur);
+		
+}
+
+function get_compteur($name )
+{
+	//cf http://www.supportduweb.com/scripts_tutoriaux-code-source-65-php-compteur-de-visites-scripts-php.html
+	$name = "mod/sign/compteur/".$name.".txt";
+	$compte = 0;
+	if(file_exists($name))
+	{
+		$compteur = fopen($name, 'r+');
+		$compte = fgets($compteur);
+			
+	fclose($compteur);
+	}
+	else
+	{
+		$compte = 0;
+	}
+
+	return $compte;
+}
 
 
 

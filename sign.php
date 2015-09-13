@@ -56,6 +56,8 @@ if($db->sql_numrows() == 0)
 $pathimg = "mod/sign/fond/cache/".$signID.".png";
 if (file_exists($pathimg) && filemtime($pathimg) >  (time() -$refresh) )//l mage existe si elle ne depasse pas la tmeporisation on l affiche
 {
+	// ici on affiche l'image on ne la genere pas
+	add_compteur($signID."_vue");
 	header('Content-Type: image/png');
 	readfile($pathimg);
 	exit();
@@ -111,6 +113,9 @@ $test->run();
 if($error ==  false)
 {
 // on va sauvegarder l image
+	// ici on affiche et genere l image
+	add_compteur($signID."_vue");
+	add_compteur($signID."_generate");
 	imagepng($test->get_img(),$pathimg);
 	$test->affiche();
 	exit();
