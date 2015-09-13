@@ -14,8 +14,6 @@ $is_ok = install_mod($mod_folder);
 if ($is_ok == true) {
 	require_once('mod/'.$mod_folder.'/include/common.php');
    
-		
-	
 	// création table pour les signatures
 	$db->sql_query("CREATE TABLE IF NOT EXISTS ".TABLE_SIGN_USERS." (
 			`sign_id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
@@ -27,6 +25,12 @@ if ($is_ok == true) {
 	
 	
 	mod_set_option("signCache", "10");// en heure
+	
+	// il faut également copier un fichier htaccess 
+	if (!file_exists("mod/sign/.htaccess"))
+	{
+		copy("mod/sign/sign.htaccess", "mod/sign/.htaccess");
+	}
 
 	
 
