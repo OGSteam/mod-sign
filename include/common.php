@@ -115,6 +115,12 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 				"P_points_general_a" => "?" ,
 				"P_points_general_b" => "?" ,
 				"P_points_general_c" => "?" ,
+				"P_rank_military_b_a" => "?" ,
+				"P_rank_military_b_b" => "?" ,
+				"P_rank_military_b_c" => "?" ,
+				"P_points_military_b_a" => "?" ,
+				"P_points_military_b_b" => "?" ,
+				"P_points_military_b_c" => "?" ,
 				"P_rank_eco_a" => "?" ,
 				"P_rank_eco_b" => "?" ,
 				"P_rank_eco_c" => "?" ,
@@ -142,9 +148,17 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 				"P_rank_military_d_a" => "?" ,
 				"P_rank_military_d_b" => "?" ,
 				"P_rank_military_d_c" => "?" ,
+				"P_rank_honnor_a" => "?" ,
+				"P_rank_honnor_b" => "?" ,
+				"P_rank_honnor_c" => "?" ,
 				"P_points_military_d_a" => "?" ,
 				"P_points_military_d_b" => "?" ,
 				"P_points_military_d_c" => "?" ,
+				"P_points_honnor_a" => "?" ,
+				"P_points_honnor_b" => "?" ,
+				"P_points_honnor_c" => "?" ,
+				
+				
 		);
 	}
 	elseif ($type == "alliance")

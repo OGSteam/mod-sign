@@ -5,12 +5,17 @@
 	<tr>
 		<td class='c' align='center' width='150' style='cursor:pointer'>
 			<a href="index.php?action=sign">
-				Signatures
+				Mes signatures
 			</a>
 		</td>
 		<td class='c' align='center' width='150' style='cursor:pointer'>
 			<a href="index.php?action=sign&subaction=newsign">
 				Nouvelle signature
+			</a>
+		</td>
+	<td class='c' align='center' width='150' style='cursor:pointer'>
+			<a href="index.php?action=sign&subaction=galerie">
+				Galerie
 			</a>
 		</td>
 		<td class='c' align='center' width='150' style='cursor:pointer'>

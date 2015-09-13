@@ -125,7 +125,7 @@ class signcode_parser {
 
 	public function  set_value($var)
 	{
-		
+	
 		foreach($var as $key => $value)
 		{
 				
