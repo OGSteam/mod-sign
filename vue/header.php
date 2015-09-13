@@ -23,11 +23,19 @@
 				Aide
 			</a>
 		</td>
+		<?php if ($user_data['user_admin'] == 1 || $user_data['user_coadmin'] == 1)  :?>
+		<!--  espace admin -->
+		<td class='c' align='center' width='150' style='cursor:pointer'>
+			<a href="index.php?action=sign&subaction=upload">
+				Upload
+			</a>
+		</td>
 		<td class='c' align='center' width='150' style='cursor:pointer'>
 			<a href="index.php?action=sign&subaction=admin">
 				Admin
 			</a>
 		</td>
+			<!-- fin espace admin -->
+		<?php endif;?>
 	</tr>
 </table>
-

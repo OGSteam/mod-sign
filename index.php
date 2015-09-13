@@ -27,6 +27,9 @@ switch ($pub_subaction) {
 	case "galerie":
 		require_once  "mod/sign/vue/sign_galerie.php";
 		break;
+	case "upload":
+		require_once  "mod/sign/vue/sign_upload.php";
+		break;
 	default:
 		require_once  "mod/sign/vue/sign_player.php";
 		break;
