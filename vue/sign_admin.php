@@ -34,7 +34,7 @@ if(isset($pub_htaccess))
 
 	$monht = fopen('mod/sign/.htaccess', 'r+');
 	ftruncate($monht,0);
-	fputs($monht, utf8_decode ($pub_htaccess)) ;
+	fputs($monht, utf8_decode (trim($pub_htaccess))) ;
 
 	fclose($monht);
 }
@@ -44,7 +44,7 @@ if(isset($pub_htaccess))
 
 
 <form method="POST" action="index.php?action=sign&subaction=admin">
-	<table width="300">
+	<table width="800">
 		<tr>
 			<td class="c_tech" colspan="2">Information Serveur</td>
 		</tr>

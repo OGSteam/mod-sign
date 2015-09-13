@@ -16,8 +16,4 @@ Allow from all
 
 
 
-ErrorDocument 404 /ogspy/mod/sign/sign.php
-
-
-
- 				
+ErrorDocument 404 /html/ogspy/mod/sign/sign.php

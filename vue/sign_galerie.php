@@ -5,15 +5,15 @@ $path = "";
 if (isset($pub_gal) && $pub_gal == "default")
 {
 	$cache = glob("mod/sign/fond/default/*.png");
-	$title = "Fond utilisable present ";
+	$title = "Fonds utilisables ";
 	$path = "";
 }
 else
 {
-	$title = "Signature présente dans le cache";
+	$title = "Signatures présentes dans le cache";
 	$cache = glob("mod/sign/fond/cache/*.png");
-	$_SERVER['HTTP_REFERER'] = str_replace("&gal=default", "", $_SERVER['HTTP_REFERER']);
-	$path  = str_replace("index.php?action=sign&subaction=galerie", "", $_SERVER['HTTP_REFERER'])."mod/sign/";
+	$temp = explode("/index.php?action=sign&subaction=galerie", $_SERVER['HTTP_REFERER']);
+	$path  = $temp[0]."/mod/sign/";
 }
 
 ?>
