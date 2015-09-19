@@ -17,7 +17,8 @@ if ($is_ok == true) {
 	// création table pour les signatures
 	$db->sql_query("CREATE TABLE IF NOT EXISTS ".TABLE_SIGN_USERS." (
 			`sign_id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
-			`player_id` INT( 255 ) NOT NULL  ,
+			`player_id` INT( 255 ) NOT NULL  , 
+			`cible_id` INT( 255 ) NOT NULL  ,
 			`sign_actif` INT( 11 ) NOT NULL ,
 			`code` TEXT NOT NULL ,
 			PRIMARY KEY ( `sign_id` )
