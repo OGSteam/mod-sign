@@ -32,8 +32,8 @@ $signID = $page[0];
 $error = false; 
 
 // si pas d ilge en base, on arrete,
-// vérification que la sign lui appartienne sinon redirection
-$requete = 'SELECT SU.* ,  U.user_id , U.user_stat_name as name FROM  '.TABLE_SIGN_USERS.' as SU INNER JOIN '.TABLE_USER.' as U ON SU.player_id = U.user_id  WHERE sign_id='.$signID;
+// recuperation de la sign , laison sur cible_id et plus player_id
+$requete = 'SELECT SU.* ,  U.user_id , U.user_stat_name as name FROM  '.TABLE_SIGN_USERS.' as SU INNER JOIN '.TABLE_USER.' as U ON SU.cible_id = U.user_id  WHERE sign_id='.$signID;
 $result = $db->sql_query($requete);
 $sign = $db->sql_fetch_assoc();
 // si pas de reponse, redirection
