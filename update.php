@@ -1,17 +1,16 @@
 <?php
 /**
- * update.php Met à jour le mod
  * @package [MOD] sign
  * @author machine
  */
 if (!defined('IN_SPYOGAME')) {
-    die("Hacking attempt");
+	die("Hacking attempt");
 }
 
 $mod_folder = "sign";
 $mod_name = "sign";
 require_once('mod/'.$mod_folder.'/include/common.php');
- 
+
 
 
 update_mod($mod_folder, $mod_name);
@@ -37,13 +36,13 @@ function update_to_0_1_1()
 {
 	global $db;
 
-//modif table
-$query = 'ALTER TABLE `'.TABLE_SIGN_USERS.'` ADD `cible_id` INT(10) NOT NULL'; 
-$db->sql_query($query);
+	//modif table
+	$query = 'ALTER TABLE `'.TABLE_SIGN_USERS.'` ADD `cible_id` INT(10) NOT NULL';
+	$db->sql_query($query);
 
-// fix pb, toutes les anciennes sign pointent vers le createur ....
-$query = 'UPDATE `'.TABLE_SIGN_USERS.'`  SET `cible_id`= `player_id` '; 
-$db->sql_query($query);
-	
+	// fix pb, toutes les anciennes sign pointent vers le createur ....
+	$query = 'UPDATE `'.TABLE_SIGN_USERS.'`  SET `cible_id`= `player_id` ';
+	$db->sql_query($query);
+
 }
 ?>

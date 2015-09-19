@@ -6,16 +6,16 @@ $msg = "";
 
 if (isset($pub_del))
 {
-	
+
 	if(file_exists("mod/sign/fond/default/".$pub_del.".png") && ctype_alnum($pub_del) )
 	{
 			
-			$msg = "Fichier ".$pub_del.".png supprimé ";
-			unlink("mod/sign/fond/default/".$pub_del.".png");
+		$msg = "Fichier ".$pub_del.".png supprimé ";
+		unlink("mod/sign/fond/default/".$pub_del.".png");
 	}
 	else
 	{
-		
+
 		$msg = "Impossible de supprimer le fichier ".$pub_del.".png ";
 	}
 }
@@ -53,10 +53,9 @@ else
 </table>
 <?php if($msg !=""):?>
 <p align="center">
-
-<h2><span style="font-weight: 800;color: red;">
-<?php echo $msg?>
-</span>
+<h2>
+	<span style="font-weight: 800; color: red;"> <?php echo $msg?>
+	</span>
 </h2>
 
 </p>
@@ -84,16 +83,13 @@ else
 					value="<?php echo $path.basename($filename) ;?>"
 					style="width: 600px;" />
 				</th>
-				<th>
-				<?php if (isset($pub_gal) &&  $pub_gal == "default"):?>
-				<a href="index.php?action=sign&subaction=galerie&gal=default&del=<?php echo $path.explode(".",basename($filename))[0]?>"><img src="mod/sign/icon/del.png"></img> </a>
-					<?php endif ;?>
+				<th><?php if (isset($pub_gal) &&  $pub_gal == "default"):?> <a
+					href="index.php?action=sign&subaction=galerie&gal=default&del=<?php echo $path.explode(".",basename($filename))[0]?>"><img
+						src="mod/sign/icon/del.png"></img> </a> <?php endif ;?>
 				</th>
 
 
-			</table> 
-			<?php endforeach;?>
-			
+			</table> <?php endforeach;?>
 		</th>
 	</tr>
 

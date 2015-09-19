@@ -1,4 +1,12 @@
-<?php 
+<?php
+/**
+ * @package [MOD] sign
+ * @author machine
+ */
+if (!defined('IN_SPYOGAME')) {
+	die("Hacking attempt");
+}
+
 $player_id=$user_data['user_id'];// récuperation de l id_player
 
 //présence d un id signature
@@ -29,7 +37,6 @@ if($db->sql_numrows() == 0)
 
 $requete =' DELETE FROM  '.TABLE_SIGN_USERS.'   WHERE sign_id='.$sign_id.' AND player_id ='.$player_id;
 $db->sql_query($requete);
-//echo $requete;
 echo '<SCRIPT LANGUAGE="JavaScript">';
 echo 'document.location.href="index.php?action=sign"';
 echo '</SCRIPT>';

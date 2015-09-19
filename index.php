@@ -1,13 +1,21 @@
 <?php
+/**
+ * @package [MOD] sign
+ * @author machine
+ */
+if (!defined('IN_SPYOGAME')) {
+	die("Hacking attempt");
+}
+
 include "vue/header.php";
 
 if (!isset($pub_subaction))
 {
 	$pub_subaction = "";
 }
-	
-	
-	
+
+
+
 switch ($pub_subaction) {
 	case "newsign":
 		require_once  "mod/sign/vue/sign_new.php";
@@ -35,9 +43,9 @@ switch ($pub_subaction) {
 		break;
 }
 
-	
-	
-	
+
+
+
 
 
 include "vue/footer.php";

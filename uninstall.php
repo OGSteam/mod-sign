@@ -1,11 +1,10 @@
 <?php
 /**
- * uninstall.php Désinstall le mod
  * @package [MOD] sign
  * @author machine
  */
 if (!defined('IN_SPYOGAME')) {
-    die("Hacking attempt");
+	die("Hacking attempt");
 }
 
 $mod_uninstall_name = "sign";

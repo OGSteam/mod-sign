@@ -1,4 +1,11 @@
-<?php 
+<?php
+/**
+ * @package [MOD] sign
+ * @author machine
+ */
+if (!defined('IN_SPYOGAME')) {
+	die("Hacking attempt");
+}
 // vérification des droits
 if ($user_data['user_admin'] != 1 && $user_data['user_coadmin'] != 1) {
 	redirection('index.php?action=message&id_message=forbidden&info');

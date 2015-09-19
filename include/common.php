@@ -45,7 +45,7 @@ function get_samples()
 	$samples[] = array("[string]", "Ecrit du texte <br />Il faut preciser la taille ( entre 1 et 5 ), le point d origine <br />Cette balise utilise une balise color." ,"[fond=350,90][/fond]\r\n[color=120,200,120]color2[/color]\r\n[string=3,100,50,color2]test[/string]\r\n[string=5,100,70,color2]CONCLUANT[/string]\r\n" );
 	$samples[] = array("[stringeffect]", "Ecrit du texte <br />Il faut preciser la taille ( entre 1 et 5 ) ainsi que le type d effet  (1  ou 2 ), le point d origine <br />Cette balise utilise une balise color." ,"[fond=350,90][/fond]\r\n[color=120,200,120]color2[/color]\r\n[color=150,150,150]color1[/color]\r\n[stringeffect=3,100,50,color2,color1,1]test[/stringeffect]\r\n[stringeffect=5,100,70,color2,color1,2]CONCLUANT[/stringeffect]\r\n" );
 	//$samples[] = array("[degrade]", "Dessine un degradé de couleur <br />Il faut preciser les cotes du rectangle à dessiner ainsi que le sens du degradé 'h' ou 'v' et la couleur de debut et de fin <br />Cette balise utilise deux balises color." ,"[fond=350,90][/fond]\r\n[color=255,0,0]color2[/color]\r\n[color=0,0,255]color1[/color]\r\n[degrade=20,20,300,85,v,color1,color2]\r\n\r\n" );
-	
+
 
 	$var = "";
 	for ($i = 0 ; $i <  count($types) ; $i++)
@@ -58,17 +58,6 @@ function get_samples()
 			$var = $var." [string=2,10,".$tmp_i.",color2]".$types[$i]." : [/string]";
 			$var = $var." [string=2,10,".$tmp_i2.",color2] RANK  : [var=P_rank_".$types[$i]."_a] | [var=P_rank_".$types[$i]."_b] | [var=P_rank_".$types[$i]."_c] [/string]";
 			$var = $var." [string=2,10,".$tmp_i3.",color2] POINT : [var=P_points_".$types[$i]."_a] | [var=P_points_".$types[$i]."_b] |  [var=P_points_".$types[$i]."_c] [/string]";
-				
-		//	'P_rank_general_a' => string '212' (length=3)
-		//	'P_rank_general_b' => string '212' (length=3)
-		//	'P_rank_general_c' => string '212' (length=3)
-		//	'P_points_general_a' => string '22163742' (length=8)
-		//	'P_points_general_b' => string '22 163 742' (length=10)
-		//	'P_points_general_c' => string '22.163.742' (length=10)
-			
-		//	$var = $var." [string=2,10,".$tmp_i.",color2]".$types[$i]."  : [player=".$types[$i].",rank,0][/string] | [player=".$types[$i].",rank,1][/string] | [player=".$types[$i].",rank,2][/string]";
-			//$var = $var." [string=2,10,".$tmp_i2.",color2]".$types[$i]."  : [player=".$types[$i].",rank,0][/string] | [player=".$types[$i].",rank,1][/string] | [player=".$types[$i].",rank,2][/string]";
-		//	$var = $var." [string=2,10,".$tmp_i3.",color2]".$types[$i]."  : [player=".$types[$i].",points,0][/string] /r/n [player=".$types[$i].",points,1][/string] | [player=".$types[$i].",points,2][/string]";
 
 				
 		}
@@ -79,13 +68,8 @@ function get_samples()
 			[string=2,10,1,color2]Date en cours : [var=P_date_a] ou [var=P_date_b][/string]
 			[string=2,10,30,color2]Nom joueur : [var=player_name] ! [/string]
 			[string=2,10,50,color2]Alliance joueur : [var=alliance_name][/string]
-			
+				
 			[string=4,10,80,color2]classement joueur : [/string]".$var );
-//	$retour[$type."_date_a"] = date("d/m/Y", $date_key);
-	//$retour[$type."_date_b"]
-
-	//$samples[] = array("[player]", "Retourne les infomations du joueurs <br />Il faut preciser le type d'information recherché aisi que le type de formatage   (0,1  ou 2)." ,"[fond=350,90][/fond]\r\n[color=120,200,120]color2[/color]\r\n[string=4,10,20,color2][player=date,rank,0][/string]\r\n[string=4,100,50,color2][player=date,rank,1][/string]\r\n[string=4,150,20,color2][player=date,rank,2][/string]" );
-
 
 	return $samples;
 
@@ -97,12 +81,12 @@ function get_samples()
 
 function individual_ranking_to_sign_code_ranking($array, $type)
 {
-	$retour = array(); 
+	$retour = array();
 	if ($type == "player")
 	{
 		$type = "P";
-		
-		
+
+
 		// on initialise un tableau vide
 		$retour = array(
 				"player_name" => "XXX" ,
@@ -157,8 +141,8 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 				"P_points_honnor_a" => "?" ,
 				"P_points_honnor_b" => "?" ,
 				"P_points_honnor_c" => "?" ,
-				
-				
+
+
 		);
 	}
 	elseif ($type == "alliance")
@@ -169,9 +153,7 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 
 	$date_key =  key($array);
 	$date_key =  array_keys($array);
-	
-	//var_dump( $date_key);
-	//exit();
+
 
 	///on va travailler en cle => valeur
 	$retour[$type."_date_a"] = date("d/m/Y", $date_key[0]);
@@ -179,14 +161,14 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 
 	$aselect = array("rank","points");
 
-	
+
 	foreach ($date_key  as $date)
 	{
-			$can_return = true; // tant que tout ne sera pas rempli on passera la valeur a false 		
+		$can_return = true; // tant que tout ne sera pas rempli on passera la valeur a false
 		foreach ($array[$date]  as $key => $value)
 		{
 			// on prepare une eventuelle sortie ( => pas la peine de boucler jusqu au bout si toutest renseigné
-		
+
 			foreach ( $aselect as $select)
 			{
 				if ( isset($retour[$type."_".$select."_".$key."_a"]) && $retour[$type."_".$select."_".$key."_a"]  == "?" ) // si pas encore chargé ( isset pour partie help ... )
@@ -197,18 +179,18 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 					$can_return = false;
 				}
 			}
-		
+
 
 		}
 
-			if ($can_return )
-			{
-				return $retour; 
-			}
-		
+		if ($can_return )
+		{
+			return $retour;
+		}
+
 	}
-		
-	
+
+
 
 
 
@@ -229,11 +211,11 @@ function add_compteur($name )
 		$compteur = fopen($name, 'a+');
 		$compte = 0;
 	}
-	$compte++; 
-		fseek($compteur, 0);
-		fputs($compteur, $compte);
-		fclose($compteur);
-		
+	$compte++;
+	fseek($compteur, 0);
+	fputs($compteur, $compte);
+	fclose($compteur);
+
 }
 
 function get_compteur($name )
@@ -246,7 +228,7 @@ function get_compteur($name )
 		$compteur = fopen($name, 'r+');
 		$compte = fgets($compteur);
 			
-	fclose($compteur);
+		fclose($compteur);
 	}
 	else
 	{

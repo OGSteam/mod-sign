@@ -1,10 +1,17 @@
 <?php
+/**
+ * @package [MOD] sign
+ * @author machine
+ */
+if (!defined('IN_SPYOGAME')) {
+	die("Hacking attempt");
+}
+
 if (!(defined('IN_SPYOGAME') || defined('IN_SIGN')) )
 {
 	die("Hacking Attempt!");
 }
 
-// vérification des droits
 // vérification des droits
 if ($user_data['user_admin'] != 1 && $user_data['user_coadmin'] != 1) {
 	redirection('index.php?action=message&id_message=forbidden&info');
@@ -71,8 +78,7 @@ if(isset($pub_htaccess))
 			} else {
 				echo '<span style="font-weight: 800;color: red;">La librairie GD n\'est pas activée ! le mod ne pourra pas fonctionner !</span>';
 			}
-			?>
-			</th>
+			?></th>
 		</tr>
 
 
@@ -99,7 +105,8 @@ if(isset($pub_htaccess))
 
 			<th>Temps de cache (heure)</th>
 			<th><input name="signCache"
-				value="<?php echo abs((int)mod_get_option("signCache")); ?>" type="textbox">
+				value="<?php echo abs((int)mod_get_option("signCache")); ?>"
+				type="textbox">
 			</th>
 
 		</tr>
@@ -116,7 +123,6 @@ if(isset($pub_htaccess))
 		<tr>
 			<th colspan="2"><span style="font-weight: 800; color: red;">Cache
 					supprimé.</span>
-			
 			</th>
 		</tr>
 		<?php endif;?>
@@ -144,8 +150,7 @@ if(isset($pub_htaccess))
 					$temps = $value;
 				}else {$temps = $value."/".$temps;
 				}?> <?php echo "/".$temps ;?> <br /> <?php endforeach ;?> <br /> <br />
-				ELLE DOIT ABSOLUMENT ETRE INSCRITE CI-DESSOUS !!!<br />
-			<br />
+				ELLE DOIT ABSOLUMENT ETRE INSCRITE CI-DESSOUS !!!<br /> <br />
 
 
 			</th>
@@ -156,17 +161,8 @@ if(isset($pub_htaccess))
 					<?php echo file_get_contents('mod/sign/.htaccess'); ?>
 				</textarea></th>
 		
-	
-	<tr>
-
 		
-		
-		
-		
-		
-		
-		
-		
+		<tr>
 		
 		
 		<tr>

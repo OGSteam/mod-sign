@@ -29,7 +29,7 @@ $test = new signcode_parser( $samples[$pub_id][2]);
 /// sinon généré ilmage via parser bbcode
 $individual_ranking = galaxy_show_ranking_unique_player($sign['name'] );
 $value = individual_ranking_to_sign_code_ranking($individual_ranking, "player" );
-$value["player_name"] = $sign['name']; 
+$value["player_name"] = $sign['name'];
 $value["alliance_name"] = "a implementer ";
 
 $test->set_value($value);

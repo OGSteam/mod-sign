@@ -1,4 +1,12 @@
-<?php 
+<?php
+/**
+ * @package [MOD] sign
+ * @author machine
+ */
+if (!defined('IN_SPYOGAME')) {
+	die("Hacking attempt");
+}
+
 global $user_data ;
 $samples = get_samples();
 $individual_ranking = galaxy_show_ranking_unique_player($user_data['user_stat_name'] );
@@ -6,7 +14,7 @@ $individual_ranking = galaxy_show_ranking_unique_player($user_data['user_stat_na
 ?>
 <table width="1200">
 	<tr>
-		<th >Balise</th>
+		<th>Balise</th>
 		<th>Utilisation</th>
 		<th>Exemple</th>
 		<th>Resultat</th>
@@ -14,10 +22,15 @@ $individual_ranking = galaxy_show_ranking_unique_player($user_data['user_stat_na
 	<?php $i=0; ?>
 	<?php foreach ($samples as $sample) : ?>
 	<tr>
-		<td class="a" ><?php echo $sample[0];?></td>
-		<td class="b" ><?php echo $sample[1];?></td>
-		<td class="c" ><textarea rows="10" cols="30"  name="code" ><?php echo $sample[2];?></textarea> </td>
-		<td class="c" ><img src="mod/sign/samples.php?id=<?php echo $i ; ?>&player=<?php echo $user_data["user_id"] ; ?>"></td>
+		<td class="a"><?php echo $sample[0];?></td>
+		<td class="b"><?php echo $sample[1];?></td>
+		<td class="c"><textarea rows="10" cols="30" name="code">
+				<?php echo $sample[2];?>
+			</textarea>
+		</td>
+		<td class="c"><img
+			src="mod/sign/samples.php?id=<?php echo $i ; ?>&player=<?php echo $user_data["user_id"] ; ?>">
+		</td>
 	</tr>
 	<?php $i++; ?>
 	<?php endforeach; ?>
