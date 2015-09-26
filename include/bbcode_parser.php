@@ -13,8 +13,9 @@ class signcode_parser {
 	protected $path_ttf="";
 
 
-	protected $cst_fond = array( '~\[fond\](.*?)\[/fond\]~s'  , '~\[fond=(\d*?),(\d*?)\]\[/fond\]~s' );
+	protected $cst_fond = array( '~\[fond\](.*?)\[/fond\]~s'  , '~\[fond=(\d*?),(\d*?)\]\[/fond\]~s' , '~\[fond=(\d*?),(\d*?)\]0\[/fond\]~s' );
 	protected $cst_color = '~\[color=(\d*?),(\d*?),(\d*?)\]([[:alnum:]]*?)\[/color\]~s';
+	protected $cst_colora = '~\[color=(\d*?),(\d*?),(\d*?),(\d*?)\]([[:alnum:]]*?)\[/color\]~s';
 	protected $cst_line = '~\[line=(\d*?),(\d*?),(\d*?),(\d*?)\]([[:alnum:]]*?)\[/line\]~s';
 	protected $cst_rectangle =array('~\[rectanglefilled=(\d*?),(\d*?),(\d*?),(\d*?),([[:alnum:]]*?)\]~s', '~\[rectangle=(\d*?),(\d*?),(\d*?),(\d*?),([[:alnum:]]*?)\]~s') ;
 	protected $cst_string =  '~\[string=(\d*?),(\d*?),(\d*?),([[:alnum:]]*?)\](.*?)\[/string\]~s';
@@ -83,13 +84,21 @@ class signcode_parser {
 			if (file_exists($path))
 			{
 				$this->img = imagecreatefrompng($path);
+		
 			}
 
 		}
-		elseif 	(preg_match($this->cst_fond[1] ,  $this->code, $matches))
+		elseif 	(preg_match($this->cst_fond[1] ,  $this->code, $matches)) // fond noir 
 		{
 			$this->img = imagecreatetruecolor( (int)$matches[1], (int)$matches[2] );
-
+		
+		}
+		elseif 	(preg_match($this->cst_fond[2] ,  $this->code, $matches)) // fond transparent
+		{
+			$this->img = imagecreatetruecolor( (int)$matches[1], (int)$matches[2] );
+			$color = imagecolorallocatealpha($this->img, 0, 0, 0, 127);
+			imagefill($this->img, 0, 0, $color);
+			imagesavealpha($this->img, true);
 		}
 		else
 		{
@@ -142,7 +151,7 @@ class signcode_parser {
 	{
 		// on récupére le fond
 		$matches = array();
-		if 	(preg_match_all($this->cst_color ,  $this->code, $matches))
+	if 	(preg_match_all($this->cst_color ,  $this->code, $matches))
 		{
 			// on a des reponses, nous allons donc stockers les variables qui vont biens
 			$total = count($matches[0]);
@@ -150,9 +159,21 @@ class signcode_parser {
 			for ($i = 0; $i < $total; $i++) {
 				$this->color[$matches[4][$i]] = imagecolorallocate($this->img, $matches[1][$i], $matches[2][$i], $matches[3][$i]);
 			}
-
-
 		}
+		
+		if 	(preg_match_all($this->cst_colora ,  $this->code, $matches))
+		{
+			// on a des reponses, nous allons donc stockers les variables qui vont biens
+			$total = count($matches[0]);
+		
+			for ($i = 0; $i < $total; $i++) {
+				$this->color[$matches[5][$i]] = imagecolorallocatealpha($this->img, $matches[1][$i], $matches[2][$i], $matches[3][$i], $matches[4][$i]);
+			}
+		}
+		
+		
+		
+		
 
 	}
 
