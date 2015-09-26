@@ -58,6 +58,7 @@ if (file_exists($pathimg) && filemtime($pathimg) >  (time() -$refresh) )//l mage
 	exit();
 }
 
+
 /// sinon généré ilmage via parser bbcode
 $individual_ranking = galaxy_show_ranking_unique_player($sign['name'] );
 

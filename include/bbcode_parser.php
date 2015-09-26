@@ -1,4 +1,10 @@
 <?php
+// note 
+/// pk ne pas passer par un array
+// la recherche est toujours la meme 
+// seul le nb d arg change en fonction du bbcoe/fn utilisé
+// is fn exist on balance ... 
+
 class signcode_parser {
 	protected $code = "";
 	protected $img;
@@ -18,6 +24,7 @@ class signcode_parser {
 	protected $cst_colora = '~\[color=(\d*?),(\d*?),(\d*?),(\d*?)\]([[:alnum:]]*?)\[/color\]~s';
 	protected $cst_line = '~\[line=(\d*?),(\d*?),(\d*?),(\d*?)\]([[:alnum:]]*?)\[/line\]~s';
 	protected $cst_rectangle =array('~\[rectanglefilled=(\d*?),(\d*?),(\d*?),(\d*?),([[:alnum:]]*?)\]~s', '~\[rectangle=(\d*?),(\d*?),(\d*?),(\d*?),([[:alnum:]]*?)\]~s') ;
+	protected $cst_ellipse =array('~\[ellipsefilled=(\d*?),(\d*?),(\d*?),(\d*?),([[:alnum:]]*?)\]~s', '~\[ellipse=(\d*?),(\d*?),(\d*?),(\d*?),([[:alnum:]]*?)\]~s') ;
 	protected $cst_string =  '~\[string=(\d*?),(\d*?),(\d*?),([[:alnum:]]*?)\](.*?)\[/string\]~s';
 	protected $cst_stringeffect = '~\[stringeffect=(\d*?),(\d*?),(\d*?),([[:alnum:]]*?),([[:alnum:]]*?),(\d*?)\](.*?)\[/stringeffect\]~s';
 	protected $cst_var = '~\[var=([[:alnum:]]{3,10}),([[:alnum:]]{4,7}),(\d*?)\]~s';
@@ -43,6 +50,7 @@ class signcode_parser {
 		$this->get_fond(); // récuperation de l image ( retourne seulement la premeire balise fond trouvé
 		$this->get_color(); // récuperation des valiable des couleurs et stockage
 		$this->get_rectangle();	// ajout des lignes
+		$this->get_ellipse();	// ajout des elipse /cercle
 		$this->get_line();	// ajout des lignes
 		$this->get_string();	// ajout des lignes
 
@@ -99,7 +107,8 @@ class signcode_parser {
 			$color = imagecolorallocatealpha($this->img, 0, 0, 0, 127);
 			imagefill($this->img, 0, 0, $color);
 			imagesavealpha($this->img, true);
-		}
+		}	// on a des reponses, nous allons donc stockers les variables qui vont biens
+		
 		else
 		{
 			echo "pas de fond on arrete la";
@@ -147,7 +156,7 @@ class signcode_parser {
 
 
 
-	private  function get_color()
+private  function get_color()
 	{
 		// on récupére le fond
 		$matches = array();
@@ -176,6 +185,40 @@ class signcode_parser {
 		
 
 	}
+	
+	private  function get_ellipse()
+	{
+		$matches = array();
+
+		if 	(preg_match_all($this->cst_ellipse[0] ,  $this->code, $matches))
+		{
+			$total = count($matches[0]);
+
+			for ($i = 0; $i < $total; $i++) {
+
+				imagefilledellipse($this->img,  $matches[1][$i] , $matches[2][$i] ,$matches[3][$i] , $matches[4][$i], $this->color[$matches[5][$i]] );
+			}
+
+
+		}
+
+		if 	(preg_match_all($this->cst_ellipse[1] ,  $this->code, $matches))
+		{
+			$total = count($matches[0]);
+
+			for ($i = 0; $i < $total; $i++) {
+
+				imageellipse($this->img,  $matches[1][$i] , $matches[2][$i] ,$matches[3][$i] , $matches[4][$i], $this->color[$matches[5][$i]] );
+			}
+
+
+		}
+		
+	
+	}
+	
+	
+	
 
 
 	private  function convert_var()
@@ -230,7 +273,7 @@ class signcode_parser {
 
 	private  function get_rectangle()
 	{
-		// on récupére le fond
+		
 		$matches = array();
 
 		if 	(preg_match_all($this->cst_rectangle[0] ,  $this->code, $matches))
