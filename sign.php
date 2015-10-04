@@ -60,12 +60,25 @@ if (file_exists($pathimg) && filemtime($pathimg) >  (time() -$refresh) )//l mage
 
 
 /// sinon généré ilmage via parser bbcode
-$individual_ranking = galaxy_show_ranking_unique_player($sign['name'] );
+$individual_ranking = galaxy_show_ranking_unique_player($sign['name']);
+
+
+// récuperation du nom de l 'alliance 
+$sign['ally'] =  "";
+$request = "select ally from " . TABLE_RANK_PLAYER_POINTS . "  where player = '".$sign['name']."' order by datadate DESC LIMIT 1 ";
+$result = $db->sql_query($request);
+while ($row = $db->sql_fetch_assoc($result)) {
+	if ($row["ally"] != "")
+		$sign['ally'] = $row["ally"];
+}
+
+
+
 
 $test = new signcode_parser( $sign['code']);
 $value = individual_ranking_to_sign_code_ranking($individual_ranking , "player");
 $value["player_name"] = $sign['name'];
-$value["alliance_name"] = "A Implementer";
+$value["alliance_name"] =  $sign['ally'] ;
 
 $test->set_value($value);
 
