@@ -50,7 +50,8 @@ function get_samples()
 	$samples[] = array("[stringeffect]", "Ecrit du texte <br />Il faut preciser la taille ( entre 1 et 5 ) ainsi que le type d effet  (1  ou 2 ), le point d origine <br />Cette balise utilise une balise color." ,"[fond=350,90][/fond]\r\n[color=120,200,120]color2[/color]\r\n[color=150,150,150]color1[/color]\r\n[stringeffect=3,100,50,color2,color1,1]test[/stringeffect]\r\n[stringeffect=5,100,70,color2,color1,2]CONCLUANT[/stringeffect]\r\n" );
 	//$samples[] = array("[degrade]", "Dessine un degradé de couleur <br />Il faut preciser les cotes du rectangle à dessiner ainsi que le sens du degradé 'h' ou 'v' et la couleur de debut et de fin <br />Cette balise utilise deux balises color." ,"[fond=350,90][/fond]\r\n[color=255,0,0]color2[/color]\r\n[color=0,0,255]color1[/color]\r\n[degrade=20,20,300,85,v,color1,color2]\r\n\r\n" );
 
-
+	/// player
+	
 	$var = "";
 	for ($i = 0 ; $i <  count($types) ; $i++)
 	{
@@ -75,6 +76,31 @@ function get_samples()
 				
 			[string=4,10,80,color2]classement joueur : [/string]".$var );
 
+	/// alliance
+	
+	$var = "";
+	for ($i = 0 ; $i <  count($types) ; $i++)
+	{
+		foreach ($types as $type)
+		{
+			$tmp_i = 90 + $i *45;
+			$tmp_i2 = 90 + 10 + $i *45;
+			$tmp_i3 = 90 + 20 + $i *45;
+			$var = $var." [string=2,10,".$tmp_i.",color2]".$types[$i]." : [/string]";
+			$var = $var." [string=2,10,".$tmp_i2.",color2] RANK  : [var=A_rank_".$types[$i]."_a] | [var=A_rank_".$types[$i]."_b] | [var=A_rank_".$types[$i]."_c] [/string]";
+			$var = $var." [string=2,10,".$tmp_i3.",color2] POINT : [var=A_points_".$types[$i]."_a] | [var=A_points_".$types[$i]."_b] |  [var=A_points_".$types[$i]."_c] [/string]";
+
+				
+		}
+
+	}
+	$samples[] = array("[var]", "Retourne les infomations de lalliance  <br />Il faut preciser le type d'information recherché aisi que le type de formatage   (0,1  ou 2)." ,
+			"[fond=350,800][/fond]\r\n[color=120,200,120]color2[/color]\r\n
+			[string=2,10,1,color2]Date en cours : [var=A_date_a] ou [var=A_date_b][/string]
+			[string=2,10,50,color2]Alliance joueur : [var=alliance_name][/string]
+				
+			[string=4,10,80,color2]classement Alliance : [/string]".$var );
+
 	return $samples;
 
 
@@ -86,6 +112,8 @@ function get_samples()
 function individual_ranking_to_sign_code_ranking($array, $type)
 {
 	$retour = array();
+	
+	
 	if ($type == "player")
 	{
 		$type = "P";
@@ -151,7 +179,64 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 	}
 	elseif ($type == "alliance")
 	{
+		
 		$type = "A";
+		
+		
+		// on initialise un tableau vide
+		$retour = array(
+				"A_date_a" => "?" ,
+				"A_date_b" => "?" ,
+				"A_rank_general_a" => "?" ,
+				"A_rank_general_b" => "?" ,
+				"A_rank_general_c" => "?" ,
+				"A_points_general_a" => "?" ,
+				"A_points_general_b" => "?" ,
+				"A_points_general_c" => "?" ,
+				"A_rank_military_b_a" => "?" ,
+				"A_rank_military_b_b" => "?" ,
+				"A_rank_military_b_c" => "?" ,
+				"A_points_military_b_a" => "?" ,
+				"A_points_military_b_b" => "?" ,
+				"A_points_military_b_c" => "?" ,
+				"A_rank_eco_a" => "?" ,
+				"A_rank_eco_b" => "?" ,
+				"A_rank_eco_c" => "?" ,
+				"A_points_eco_a" => "?" ,
+				"A_points_eco_b" => "?" ,
+				"A_points_eco_c" => "?" ,
+				"A_rank_techno_a" => "?" ,
+				"A_rank_techno_b" => "?" ,
+				"A_rank_techno_c" => "?" ,
+				"A_points_techno_a" => "?" ,
+				"A_points_techno_b" => "?" ,
+				"A_points_techno_c" => "?" ,
+				"A_rank_military_a" => "?" ,
+				"A_rank_military_b" => "?" ,
+				"A_rank_military_c" => "?" ,
+				"A_points_military_a" => "?" ,
+				"A_points_military_b" => "?" ,
+				"A_points_military_c" => "?" ,
+				"A_rank_military_l_a" => "?" ,
+				"A_rank_military_l_b" => "?" ,
+				"A_rank_military_l_c" => "?" ,
+				"A_points_military_l_a" => "?" ,
+				"A_points_military_l_b" => "?" ,
+				"A_points_military_l_c" => "?" ,
+				"A_rank_military_d_a" => "?" ,
+				"A_rank_military_d_b" => "?" ,
+				"A_rank_military_d_c" => "?" ,
+				"A_rank_honnor_a" => "?" ,
+				"A_rank_honnor_b" => "?" ,
+				"A_rank_honnor_c" => "?" ,
+				"A_points_military_d_a" => "?" ,
+				"A_points_military_d_b" => "?" ,
+				"A_points_military_d_c" => "?" ,
+				"A_points_honnor_a" => "?" ,
+				"A_points_honnor_b" => "?" ,
+				"A_points_honnor_c" => "?" ,
+		
+	);
 	}
 
 
@@ -182,6 +267,10 @@ function individual_ranking_to_sign_code_ranking($array, $type)
 					$retour[$type."_".$select."_".$key."_c"] = number_format($value[$select], 0, ',', '.') ;
 					$can_return = false;
 				}
+				// todo pt par membre uniquement pour alliance 
+				
+				
+				
 			}
 
 

@@ -76,7 +76,14 @@ while ($row = $db->sql_fetch_assoc($result)) {
 
 
 $test = new signcode_parser( $sign['code']);
+
+// info player
 $value = individual_ranking_to_sign_code_ranking($individual_ranking , "player");
+
+// on ajoute les infos alliances 
+$individual_alliance__ranking = galaxy_show_ranking_unique_ally($sign['ally']);
+$value = array_merge($value, individual_ranking_to_sign_code_ranking($individual_alliance__ranking , "alliance"));
+
 $value["player_name"] = $sign['name'];
 $value["alliance_name"] =  $sign['ally'] ;
 
