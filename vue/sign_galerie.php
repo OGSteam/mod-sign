@@ -75,11 +75,11 @@ else
 				<tr>
 					<th colspan="2">
 						<center>
-							<img src="<?php echo $filename ;?>"<img>
+							<img src="<?php echo $filename ;?>">
 						</center>
 					</th>
 				</tr>
-				<th><input type=text
+				<th><input type=textDefault
 					value="<?php echo $path.basename($filename) ;?>"
 					style="width: 600px;" />
 				</th>

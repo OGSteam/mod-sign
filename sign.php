@@ -83,6 +83,12 @@ $value = individual_ranking_to_sign_code_ranking($individual_ranking , "player")
 // on ajoute les infos alliances 
 $individual_alliance__ranking = galaxy_show_ranking_unique_ally($sign['ally']);
 $value = array_merge($value, individual_ranking_to_sign_code_ranking($individual_alliance__ranking , "alliance"));
+// recup rpod
+$empire = _user_get_empire($sign['user_id']);
+$prod = _user_empire_production($empire);
+$value=  array_merge($value, get_prod($prod));
+
+
 
 $value["player_name"] = $sign['name'];
 $value["alliance_name"] =  $sign['ally'] ;
@@ -90,7 +96,6 @@ $value["alliance_name"] =  $sign['ally'] ;
 $test->set_value($value);
 
 $test->run();
-
 
 if($error ==  false)
 {

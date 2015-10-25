@@ -15,10 +15,13 @@ define('TABLE_SIGN_USERS', $table_prefix.'sign_users');
 if (file_exists('mod/sign/include/bbcode_parser.php'))
 {
 	include_once 'mod/sign/include/bbcode_parser.php';
+	include_once 'mod/sign/include/prod.php';
+	
 }
 else
 {
 	include_once 'include/bbcode_parser.php';
+	include_once 'mod/sign/include/prod.php';
 }
 
 
@@ -332,4 +335,36 @@ function get_compteur($name )
 }
 
 
-
+function get_prod($prod)
+{
+	$retour = array();
+	$M = 0;
+	$C = 0;
+	$D = 0;
+	
+	// on récupere le total
+	foreach ($prod["reel"] as $p)
+	{
+		$M += $p["M"];
+		$C += $p["C"];
+		$D += $p["D"];
+	}
+	
+	// on prépare le retour
+	$ress = array("M"=>$M,"C"=>$C,"D"=>$C);
+	$temp = array("heure" => 1 , "jour" => 24, "semaine" => 168, "mois" => 720); /// en nb d heure
+	
+	foreach ($ress as $type => $value)
+	{
+		foreach ($temp as $temps_type => $temps_coef)
+		{
+		$retour["prod_".$type."_".$temps_type."_a"]= $temps_coef * $value  ; //* temps_coef;
+		$retour["prod_".$type."_".$temps_type."_b"]= number_format( $temps_coef * $value , 0, ',', ' ') ;
+		$retour["prod_".$type."_".$temps_type."_c"]=  number_format( $temps_coef * $value , 0, ',', '.') ;
+		}
+	}
+	
+	return $retour;
+	
+	
+}
