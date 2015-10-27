@@ -49,7 +49,7 @@ function get_samples()
 	$samples[] = array("[rectanglefilled]<br />[rectangle]", "Faire un effet valable également avec elipse, line ... " ,"[fond=230,220][/fond]\r\n[color=120,120,120]color2[/color]\r\n[color=200,200,200]color1[/color]\r\n[rectanglefilled=50,50,100,100,color2]\r\n[rectangle=50,50,100,100,color1]\r\n[rectanglefilled=150,150,200,200,color2]\r\n[rectanglefilled=152,152,201,201,color1]\r\n" );
 	$samples[] = array("[ellipse]", "Dessine une ellipse Il faut indiquer le point d'origine  puis hauteur largeur   <br />Cette balise utilise une balise color." ,"[fond=200,200][/fond]\r\n[color=120,200,120]color2[/color]\r\n[color=255,0,10]color1[/color]\r\n[ellipse=50,50,40,40,color1]\r\n" );
 	$samples[] = array("[ellipsefilled]", "Dessine une ellipse  pleine Il faut indiquer le point d'origine puis hauteur largeur  <br />Cette balise utilise une balise color." ,"[fond=200,200][/fond]\r\n[color=120,200,120]color2[/color]\r\n[color=255,0,10]color1[/color]\r\n[ellipsefilled=50,50,120,80,color1]\r\n" );
-	$samples[] = array("[string]", "Ecrit du texte <br />Il faut preciser la taille ( entre 1 et 5 ), le point d origine <br />Cette balise utilise une balise color." ,"[fond=350,90][/fond]\r\n[color=120,200,120]color1[/color]\r\n[color=120,200,120,80]color2[/color]\r\n[string=3,100,50,color2]test[/string]\r\n[string=5,100,70,color1]CONCLUANT[/string]\r\n" );
+	$samples[] = array("[string]", "Ecrit du texte <br />Il faut preciser la taille ( entre 1 et 5 ), le point d origine <br />Cette balise utilise une balise color." ,"[fond=350,90][/fond]\r\n[color=120,200,120]color1[/color]\r\n[color=120,200,120,110]color2[/color]\r\n[string=3,100,50,color2]test[/string]\r\n[string=5,100,70,color1]CONCLUANT[/string]\r\n" );
 	$samples[] = array("[stringeffect]", "Ecrit du texte <br />Il faut preciser la taille ( entre 1 et 5 ) ainsi que le type d effet  (1  ou 2 ), le point d origine <br />Cette balise utilise une balise color." ,"[fond=350,90][/fond]\r\n[color=120,200,120]color2[/color]\r\n[color=150,150,150]color1[/color]\r\n[stringeffect=3,100,50,color2,color1,1]test[/stringeffect]\r\n[stringeffect=5,100,70,color2,color1,2]CONCLUANT[/stringeffect]\r\n" );
 	//$samples[] = array("[degrade]", "Dessine un degradé de couleur <br />Il faut preciser les cotes du rectangle à dessiner ainsi que le sens du degradé 'h' ou 'v' et la couleur de debut et de fin <br />Cette balise utilise deux balises color." ,"[fond=350,90][/fond]\r\n[color=255,0,0]color2[/color]\r\n[color=0,0,255]color1[/color]\r\n[degrade=20,20,300,85,v,color1,color2]\r\n\r\n" );
 
@@ -71,8 +71,8 @@ function get_samples()
 		}
 
 	}
-	$samples[] = array("[var]", "Retourne les infomations du joueurs <br />Il faut preciser le type d'information recherché aisi que le type de formatage   (0,1  ou 2)." ,
-			"[fond=350,800][/fond]\r\n[color=120,200,120]color2[/color]\r\n
+	$samples[] = array("[var]", "Retourne les infomations du joueurs <br />Il faut preciser le type d'information recherché aisi que le type de formatage (a, b ou c)." ,
+			"[fond=350,500][/fond]\r\n[color=120,200,120]color2[/color]\r\n
 			[string=2,10,1,color2]Date en cours : [var=P_date_a] ou [var=P_date_b][/string]
 			[string=2,10,30,color2]Nom joueur : [var=player_name] ! [/string]
 			[string=2,10,50,color2]Alliance joueur : [var=alliance_name][/string]
@@ -97,12 +97,48 @@ function get_samples()
 		}
 
 	}
-	$samples[] = array("[var]", "Retourne les infomations de lalliance  <br />Il faut preciser le type d'information recherché aisi que le type de formatage   (0,1  ou 2)." ,
-			"[fond=350,800][/fond]\r\n[color=120,200,120]color2[/color]\r\n
+	$samples[] = array("[var]", "Retourne les infomations de lalliance  <br />Il faut preciser le type d'information recherché aisi que le type de formatage  (a, b ou c)." ,
+			"[fond=350,500][/fond]\r\n[color=120,200,120]color2[/color]\r\n
 			[string=2,10,1,color2]Date en cours : [var=A_date_a] ou [var=A_date_b][/string]
 			[string=2,10,50,color2]Alliance joueur : [var=alliance_name][/string]
 				
 			[string=4,10,80,color2]classement Alliance : [/string]".$var );
+	
+	
+	$var = "";
+	
+	// on prépare le retour
+	$ress = array("M"=> "Production de Metal","C"=>"Production de Cristal","D"=>"Production de Deuterium");
+	$temp = array("heure" => 1 , "jour" => 24, "semaine" => 168, "mois" => 720); /// en nb d heure
+	$i = 40;
+	$inc = 20;
+	
+	foreach ($ress as $type => $value)
+	{	
+		$var = $var."[string=3,10,".$i.",color2]".$value." : [/string]";
+		
+		foreach ($temp as $temps_type => $temps_coef)
+		{
+			$i += $inc;
+			$var = $var."[string=2,10,".$i.",color2]Par ".$temps_type." : [/string]";
+			//$i += $inc;
+			$var = $var."[string=2,100,".$i.",color2][var=prod_".$type."_".$temps_type."_a][/string]";
+			$i += $inc;
+			$var = $var."[string=2,100,".$i.",color2][var=prod_".$type."_".$temps_type."_b][/string]";
+			$i += $inc;
+			$var = $var."[string=2,100,".$i.",color2][var=prod_".$type."_".$temps_type."_c][/string]";
+		}
+		$i += $inc * 2;
+	}
+	
+
+	
+	$samples[] = array("[var]", "Retourne les infomations de production du joueur  <br />Il faut preciser le type de formatage   (a, b ou c)." ,
+			"[fond=350,900][/fond]\r\n[color=120,200,120]color2[/color]\r\n
+			[string=5,10,20,color2]Production : [/string]".$var );
+	
+
+	
 
 	return $samples;
 

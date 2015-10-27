@@ -2,10 +2,6 @@
 define("IN_SIGN", true);
 define('IN_SPYOGAME', true);
 
-// TODO mettre ca en base ulterieurement
-$refresh = 2 ; // en seconde
-
-
 
 //cf xtense
 if (preg_match('#mod#', getcwd())) chdir('../../');
@@ -46,6 +42,11 @@ $value = individual_ranking_to_sign_code_ranking($individual_ranking, "player" )
 // on ajoute les infos alliances
 $individual_alliance__ranking = galaxy_show_ranking_unique_ally($sign['ally']);
 $value = array_merge($value, individual_ranking_to_sign_code_ranking($individual_alliance__ranking , "alliance"));
+
+// recup prod
+$empire = _user_get_empire($pub_player);
+$prod = _user_empire_production($empire);
+$value=  array_merge($value, get_prod($prod));
 
 
 $value["player_name"] = $sign['name'];
