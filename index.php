@@ -38,6 +38,9 @@ switch ($pub_subaction) {
 	case "upload":
 		require_once  "mod/sign/vue/sign_upload.php";
 		break;
+	case "changelog":
+		require_once  "mod/sign/vue/sign_changelog.php";
+		break;
 	default:
 		require_once  "mod/sign/vue/sign_player.php";
 		break;

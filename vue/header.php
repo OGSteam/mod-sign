@@ -32,7 +32,10 @@ require_once 'mod/sign/include/common.php';?>
 		<td class='c' align='center' width='150' style='cursor: pointer'><a
 			href="index.php?action=sign&subaction=admin"> Admin </a>
 		</td>
-		<!-- fin espace admin -->
-		<?php endif;?>
+				<?php endif;?>
+		<td class='c' align='center' width='150' style='cursor: pointer'><a
+			href="index.php?action=sign&subaction=changelog">Changelog </a>
+		</td>
+
 	</tr>
 </table>
