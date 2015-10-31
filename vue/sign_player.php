@@ -30,11 +30,11 @@ $result = $db->sql_query($requete);
 	{
 
 		echo '<tr>';
-		echo '<th><img src="mod/sign/'.$sign['sign_id'].'.png"></img></th>';
+		echo '<th><img src="mod/sign/'.$sign['sign_id'].'.png"></th>';
 		echo '<th>'.get_compteur($sign['sign_id'].'_vue').'</th>';
 		echo '<th>'.get_compteur($sign['sign_id'].'_generate').'</th>';
-		echo '<th><a href="index.php?action=sign&subaction=signedit&sign_id='.$sign['sign_id'].'"><img src="mod/sign/icon/edit.png"></img></a></th>';
-		echo '<th><a href="index.php?action=sign&subaction=signdel&sign_id='.$sign['sign_id'].'"><img src="mod/sign/icon/del.png"></img></a></th>';
+		echo '<th><a href="index.php?action=sign&subaction=signedit&sign_id='.$sign['sign_id'].'"><img src="mod/sign/icon/edit.png"></a></th>';
+		echo '<th><a href="index.php?action=sign&subaction=signdel&sign_id='.$sign['sign_id'].'"><img src="mod/sign/icon/del.png"></a></th>';
 		echo '</tr>';
 
 	}

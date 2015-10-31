@@ -155,7 +155,6 @@ if(isset($pub_htaccess))
 
 			</th>
 		</tr>
-		</tr>
 		<tr>
 			<th colspan="2"><textarea rows="10" cols="200" name="htaccess">
 					<?php echo file_get_contents('mod/sign/.htaccess'); ?>

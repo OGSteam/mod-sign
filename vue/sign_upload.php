@@ -83,7 +83,7 @@ if (!empty($_FILES))
 			</th>
 		</tr>
 
-
+		<tr>
 		<th>Fichier : <input type="file" name="file">
 		</th>
 		<th><input type="submit" name="envoyer" value="Envoyer le fichier">

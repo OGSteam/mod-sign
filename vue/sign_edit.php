@@ -91,7 +91,7 @@ while($tmp_user = $db->sql_fetch_assoc($result) )
 		</tr>
 		<tr>
 			<th>Signature actuelle</th>
-			<th><img src="mod/sign/<?php  echo $sign_id;?>.png"></img></th>
+			<th>< src="mod/sign/<?php  echo $sign_id;?>.png"></th>
 		</tr>
 		<tr>
 			<th>Signature active</th>
