@@ -84,15 +84,29 @@ class signcode_parser {
 
 	private  function get_fond()
 	{
+
+
 		// on récupére le fond
 		$matches = array();
 		if 	(preg_match($this->cst_fond[0] ,  $this->code, $matches))
 		{
 			$path = $this->path_default.$matches[1] ;
-			if (file_exists($path))
-			{
-				$this->img = imagecreatefrompng($path);
-		
+
+				$this->img = @imagecreatefrompng($path);
+                if(!$this->img) // en cas d erreur de chargement
+                {
+                    /* Création d'une image vide */
+                    $this->img  = imagecreatetruecolor(500, 30);
+                    $bgc = imagecolorallocate($this->img, 255, 255, 255);
+                    $tc  = imagecolorallocate($this->img, 0, 0, 0);
+
+                    imagefilledrectangle($this->img, 0, 0, 500, 30, $bgc);
+
+                    /* On y affiche un message d'erreur */
+                    imagestring($this->img, 1, 5, 5, 'Erreur de chargement ' . $path, $tc);
+
+
+
 			}
 
 		}
@@ -103,6 +117,7 @@ class signcode_parser {
 		}
 		elseif 	(preg_match($this->cst_fond[2] ,  $this->code, $matches)) // fond transparent
 		{
+		    //var_dump($matches);
 			$this->img = imagecreatetruecolor( (int)$matches[1], (int)$matches[2] );
 			$color = imagecolorallocatealpha($this->img, 0, 0, 0, 127);
 			imagefill($this->img, 0, 0, $color);
@@ -313,8 +328,9 @@ private  function get_color()
 
 	private function get_path()
 	{
-		$truepath = str_replace("/mod/sign/include" , "/mod/sign/" ,dirname(__FILE__));
-		$this->path_cache = $truepath."fond/cache/";
+        $truepath = str_replace("/mod/sign/include" , "/mod/sign/" ,dirname(__FILE__));
+        $truepath = str_replace("\mod\sign\include" , "\mod\sign\\" ,dirname(__FILE__)); //(si windows)
+        $this->path_cache = $truepath."fond/cache/";
 		$this->path_default = $truepath."fond/default/";
 		$this->path_ttf = $truepath."ttf/"; /// a suivre pour cette soluce
 

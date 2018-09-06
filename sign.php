@@ -24,7 +24,10 @@ $page = explode(".",$monUrl[$idSplit]);
 
 
 $signID = $page[0];
+
 $error = false;
+//trigger_error($_SERVER['REQUEST_URI'], E_USER_ERROR);
+//error_log($_SERVER['REQUEST_URI'], 0);
 
 // si pas  en base, on arrete,
 // recuperation de la sign , laison sur cible_id et plus player_id
@@ -103,7 +106,9 @@ if($error ==  false)
 	// ici on affiche et genere l image
 	add_compteur($signID."_vue");
 	add_compteur($signID."_generate");
-	imagepng($test->get_img(),$pathimg);
+	//var_dump($test);
+    //var_dump($test->get_img());
+    imagepng($test->get_img(),$pathimg);
 	$test->affiche();
 	exit();
 

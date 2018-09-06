@@ -26,12 +26,7 @@ if ($is_ok == true) {
 
 	mod_set_option("signCache", "10");// en heure
 
-	// il faut également copier un fichier htaccess
-	if (!file_exists("mod/sign/.htaccess"))
-	{
-		copy("mod/sign/sign.htaccess", "mod/sign/.htaccess");
-	}
-
+    createHTAccess();
 
 
 } else {

@@ -11,7 +11,7 @@ if (!(defined('IN_SPYOGAME') || defined('IN_SIGN')) )
 {
 	die("Hacking Attempt!");
 }
-
+createHTAccess();
 // vérification des droits
 if ($user_data['user_admin'] != 1 && $user_data['user_coadmin'] != 1) {
 	redirection('index.php?action=message&id_message=forbidden&info');

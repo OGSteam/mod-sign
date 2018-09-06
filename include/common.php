@@ -404,3 +404,15 @@ function get_prod($prod)
 	
 	
 }
+
+
+
+function createHTAccess()
+{
+    // il faut également copier un fichier htaccess
+    if (!file_exists("mod/sign/.htaccess"))
+    {
+        copy("mod/sign/sign.htaccess", "mod/sign/.htaccess");
+    }
+
+}

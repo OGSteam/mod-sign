@@ -35,7 +35,7 @@ function _user_get_empire($user_id)
 		$user_building[$i] = $planet;
 	}
 
-	$request = "SELECT planet_id, planet_name, coordinates, fields, boosters, temperature_min, temperature_max, Sat, Sat_percentage, M, M_percentage, C, C_Percentage, D, D_percentage, CES, CES_percentage, CEF, CEF_percentage, UdR, UdN, CSp, HM, HC, HD, CM, CC, CD, Lab, Ter, Silo, BaLu, Pha, PoSa, DdR";
+	$request = "SELECT planet_id, planet_name, coordinates, fields, boosters, temperature_min, temperature_max, Sat, Sat_percentage, M, M_percentage, C, C_Percentage, D, D_percentage, CES, CES_percentage, CEF, CEF_percentage, UdR, UdN, CSp, HM, HC, HD,  Lab, Ter, Silo, BaLu, Pha, PoSa, DdR";
 	$request .= " FROM " . TABLE_USER_BUILDING;
 	$request .= " WHERE user_id = " . $user_id;
 	$request .= " ORDER BY planet_id";
