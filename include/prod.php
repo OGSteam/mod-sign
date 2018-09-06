@@ -116,8 +116,9 @@ function _find_nb_planete_user($id)
 
 	$request = "SELECT planet_id ";
 	$request .= " FROM " . TABLE_USER_BUILDING;
-	$request .= " WHERE user_id = " . $user_data["user_id"];
-	$request .= " AND planet_id < 199 ";
+    //$request .= " WHERE user_id = " . $user_data["user_id"];
+    $request .= " WHERE user_id = " . $id;
+    $request .= " AND planet_id < 199 ";
 	$request .= " ORDER BY planet_id";
 
 	$result = $db->sql_query($request);
@@ -136,8 +137,9 @@ function _find_nb_moon_user($id)
 
 	$request = "select planet_id ";
 	$request .= " from " . TABLE_USER_BUILDING;
-	$request .= " where user_id = " . $user_data["user_id"];
-	$request .= " and planet_id > 199 ";
+    //$request .= " where user_id = " . $user_data["user_id"];
+    $request .= " where user_id = " . $id;
+    $request .= " and planet_id > 199 ";
 	$request .= " order by planet_id";
 
 	$result = $db->sql_query($request);
