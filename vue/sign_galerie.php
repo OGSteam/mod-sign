@@ -75,9 +75,12 @@ if (isset($pub_gal) && $pub_gal == "default") {
                                value="<?php echo $path . basename($filename); ?>"
                                style="width: 600px;"/>
                     </th>
-                    <th><?php if (isset($pub_gal) && $pub_gal == "default"): ?> <a
-                            href="index.php?action=sign&subaction=galerie&gal=default&del=<?php echo $path . explode(".", basename($filename))[0] ?>"><
-                                src="mod/sign/icon/del.png"> </a> <?php endif; ?>
+                    <th>
+                        <?php if (isset($pub_gal) && $pub_gal == "default"): ?>
+                            <a href="index.php?action=sign&subaction=galerie&gal=default&del=<?php echo $path . explode(".", basename($filename))[0] ?>">
+                                <img src="mod/sign/icon/del.png" />
+                            </a>
+                        <?php endif; ?>
                     </th>
                     </tr>
 
