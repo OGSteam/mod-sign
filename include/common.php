@@ -387,7 +387,7 @@ function get_prod($prod)
 	}
 	
 	// on prépare le retour
-	$ress = array("M"=>$M,"C"=>$C,"D"=>$C);
+	$ress = array("M"=>$M,"C"=>$C,"D"=>$D);
 	$temp = array("heure" => 1 , "jour" => 24, "semaine" => 168, "mois" => 720); /// en nb d heure
 	
 	foreach ($ress as $type => $value)
